@@ -1,0 +1,5 @@
+pytest
+selene==2.0.0rc9
+selenium
+allure-pytest
+requests
