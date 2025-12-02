@@ -9,7 +9,8 @@ from selene import browser, have
 @allure.feature("DemoQA")
 @allure.story("Заполнение формы DemoQA")
 @allure.link("https://demoqa.com/automation-practice-form", name="DemoQA Form")
-def test_complete_practice_form(browser):
+def test_complete_practice_form(setup_browser):
+    browser=setup_browser
 
     with allure.step("Открываем страницу"):
         browser.open('/automation-practice-form')
