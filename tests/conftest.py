@@ -23,7 +23,7 @@ def setup_browser(request):
         options=options
     )
 
-    browser = Browser(Config(driver=driver))
+    browser = Browser(Config(driver))
     yield browser
 
     attach.add_screenshot(browser)
