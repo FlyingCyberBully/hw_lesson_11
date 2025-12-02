@@ -1,18 +1,14 @@
 import pytest
-from selene import browser
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selene import Browser, Config
 
-from utils.attach import (
-    add_screenshot,
-    add_logs,
-    add_html,
-    add_video
-)
+from utils import attach
 
 
-@pytest.fixture(scope='function', autouse=True)
-def browser_management():
+@pytest.fixture(scope='function')
+def setup_browser(request):
     options = Options()
     options.set_capability("browserName", "chrome")
     options.set_capability("browserVersion", "latest")
@@ -20,26 +16,21 @@ def browser_management():
         "selenoid:options",
         {
             "enableVNC": True,
-            "enableVideo": True,
+            "enableVideo": True
         }
     )
 
     driver = webdriver.Remote(
-        command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
+        command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options
     )
 
-    browser.config.driver = driver
-    browser.config.window_width = 1920
-    browser.config.window_height = 1080
-    browser.config.base_url = "https://demoqa.com"
-    browser.config.timeout = 6
+    browser = Browser(Config(driver=driver))
+    yield browser
 
-    yield
-
-    add_screenshot()
-    add_html()
-    add_logs()
-    add_video(driver.session_id)
+    attach.add_screenshot(browser)
+    attach.add_logs(browser)
+    attach.add_html(browser)
+    attach.add_video(browser)
 
     browser.quit()

@@ -1,38 +1,57 @@
+import allure
+from allure_commons.types import Severity
 from selene import browser, have
 
 
-def test_complete_practice_form():
-    browser.open('/automation-practice-form')
+@allure.tag("web")
+@allure.severity(Severity.NORMAL)
+@allure.label("owner", "Dmitriy")
+@allure.feature("DemoQA")
+@allure.story("Заполнение формы DemoQA")
+@allure.link("https://demoqa.com/automation-practice-form", name="DemoQA Form")
+def test_complete_practice_form(browser):
 
-    browser.element('#firstName').type('John')
-    browser.element('#lastName').type('Doe')
-    browser.element('#userEmail').type('john.doe@example.com')
+    with allure.step("Открываем страницу"):
+        browser.open('/automation-practice-form')
 
-    browser.all('[for^=gender-radio]').element_by(have.text('Male')).click()
+    with allure.step("Заполняем имя и фамилию"):
+        browser.element('#firstName').type('John')
+        browser.element('#lastName').type('Doe')
 
-    browser.element('#userNumber').type('1234567890')
+    with allure.step("Вводим email"):
+        browser.element('#userEmail').type('john.doe@example.com')
 
-    browser.element('#dateOfBirthInput').click()
-    browser.element('.react-datepicker__year-select').click()
-    browser.element('.react-datepicker__year-select [value="1990"]').click()
-    browser.element('.react-datepicker__month-select [value="0"]').click()
-    browser.element('.react-datepicker__day--005').click()
+    with allure.step("Выбираем пол"):
+        browser.all('[for^=gender-radio]').element_by(have.text('Male')).click()
 
-    browser.element('#subjectsInput').type('Math').press_enter()
-    browser.element('[for=hobbies-checkbox-1]').click()
+    with allure.step("Вводим номер телефона"):
+        browser.element('#userNumber').type('1234567890')
 
-    browser.element('#uploadPicture').send_keys('/Users/dmitrij/Desktop/photo.png')
+    with allure.step("Выбираем дату рождения"):
+        browser.element('#dateOfBirthInput').click()
+        browser.element('.react-datepicker__year-select [value="1990"]').click()
+        browser.element('.react-datepicker__month-select [value="0"]').click()
+        browser.element('.react-datepicker__day--005').click()
 
-    browser.element('#currentAddress').type('Some address')
+    with allure.step("Выбираем предмет"):
+        browser.element('#subjectsInput').type('Math').press_enter()
 
-    browser.element('#state').click()
-    browser.all('#state div').element_by(have.text('NCR')).click()
+    with allure.step("Выбираем хобби"):
+        browser.element('[for=hobbies-checkbox-1]').click()
 
-    browser.element('#city').click()
-    browser.all('#city div').element_by(have.text('Delhi')).click()
+    with allure.step("Заполняем адрес"):
+        browser.element('#currentAddress').type('Some address')
 
-    browser.element('#submit').click()
+    with allure.step("Выбираем штат и город"):
+        browser.element('#state').click()
+        browser.all('#state div').element_by(have.text('NCR')).click()
+        browser.element('#city').click()
+        browser.all('#city div').element_by(have.text('Delhi')).click()
 
-    browser.element('#example-modal-sizes-title-lg').should(
-        have.text('Thanks for submitting the form')
-    )
+    with allure.step("Отправляем форму"):
+        browser.element('#submit').click()
+
+    with allure.step("Проверяем успешную отправку формы"):
+        browser.element('#example-modal-sizes-title-lg').should(
+            have.text('Thanks for submitting the form')
+        )
