@@ -15,7 +15,7 @@ from utils.attach import (
 def browser_management():
     options = Options()
     options.set_capability("browserName", "chrome")
-    options.set_capability("browserVersion", "122.0")
+    options.set_capability("browserVersion", "100.0")
     options.set_capability(
         "selenoid:options",
         {
