@@ -7,7 +7,8 @@ def add_screenshot(browser):
     allure.attach(
         png,
         name="Screenshot",
-        attachment_type=AttachmentType.PNG
+        attachment_type=AttachmentType.PNG,
+        extension=".png"
     )
 
 
@@ -18,7 +19,8 @@ def add_logs(browser):
         allure.attach(
             log_text,
             name="Browser logs",
-            attachment_type=AttachmentType.TEXT
+            attachment_type=AttachmentType.TEXT,
+            extension=".log"
         )
     except Exception:
         allure.attach(
@@ -33,7 +35,8 @@ def add_html(browser):
     allure.attach(
         html,
         name="Page source",
-        attachment_type=AttachmentType.HTML
+        attachment_type=AttachmentType.HTML,
+        extension=".html"
     )
 
 
