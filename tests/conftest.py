@@ -28,12 +28,21 @@ def setup_browser(request):
         options=options
     )
 
-    browser = Browser(Config(driver))
-    yield browser
+    # browser = Browser(Config(driver))
+    # yield browser
 
-    attach.add_screenshot(browser)
-    attach.add_logs(browser)
-    attach.add_html(browser)
-    attach.add_video(browser)
+    yield driver
 
-    browser.quit()
+    attach.add_screenshot(driver)
+    attach.add_logs(driver)
+    attach.add_html(driver)
+    attach.add_video(driver)
+
+    driver.quit()
+
+    # attach.add_screenshot(browser)
+    # attach.add_logs(browser)
+    # attach.add_html(browser)
+    # attach.add_video(browser)
+
+    # browser.quit()
