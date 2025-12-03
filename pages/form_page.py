@@ -8,7 +8,6 @@ class FormPage:
     USER_EMAIL = (By.ID, "userEmail")
     GENDER_MALE = (By.XPATH, "//label[@for='gender-radio-1']")
     MOBILE = (By.ID, "userNumber")
-    SUBJECT = (By.ID, "subjectsInput")
     SUBMIT = (By.ID, "submit")
 
     def __init__(self, driver):
@@ -31,9 +30,6 @@ class FormPage:
         
     def fill_mobile(self, value):
         self.driver.find_element(*self.MOBILE).send_keys(value)
-        
-    def add_subject(self, value):
-        self.driver.find_element(*self.SUBJECT).send_keys(value).press_enter()    
 
     def submit(self):
         submit_button = self.driver.find_element(*self.SUBMIT)
