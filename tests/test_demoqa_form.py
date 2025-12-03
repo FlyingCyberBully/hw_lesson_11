@@ -25,4 +25,4 @@ def test_practice_form(setup_browser):
         form.fill_mobile('1234567890')
 
     with allure.step("Отправляем форму"):
-        browser.find_element("#submit").click()
+        form.submit()
