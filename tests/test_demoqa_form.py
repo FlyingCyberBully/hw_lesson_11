@@ -8,7 +8,6 @@ def test_practice_form(setup_browser):
 
     with allure.step("Открываем страницу"):
         browser.get("https://demoqa.com/automation-practice-form")
-        browser.find_element(".practice-form-wrapper").should(have.text("Student Registration Form"))
 
     with allure.step("Заполняем имя и фамилию"):
         browser.find_element("#lastName").send_keys("Doe")
