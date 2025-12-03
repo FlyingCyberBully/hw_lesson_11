@@ -2,8 +2,8 @@ import allure
 from allure_commons.types import AttachmentType
 
 
-def add_screenshot(browser):
-    png = browser.driver.get_screenshot_as_png()
+def add_screenshot(driver):
+    png = driver.get_screenshot_as_png()
     allure.attach(
         png,
         name="Screenshot",
@@ -12,9 +12,9 @@ def add_screenshot(browser):
     )
 
 
-def add_logs(browser):
+def add_logs(driver):
     try:
-        logs = browser.driver.get_log('browser')
+        logs = driver.get_log('browser')
         log_text = "\n".join(f"{entry['level']} - {entry['message']}" for entry in logs)
         allure.attach(
             log_text,
@@ -30,8 +30,8 @@ def add_logs(browser):
         )
 
 
-def add_html(browser):
-    html = browser.driver.page_source
+def add_html(driver):
+    html = driver.page_source
     allure.attach(
         html,
         name="Page source",
@@ -40,9 +40,9 @@ def add_html(browser):
     )
 
 
-def add_video(browser):
+def add_video(driver):
     video_url = (
-        f"https://selenoid.autotests.cloud/video/{browser.driver.session_id}.mp4"
+        f"https://selenoid.autotests.cloud/video/{driver.session_id}.mp4"
     )
     html = (
         "<html><body>"
