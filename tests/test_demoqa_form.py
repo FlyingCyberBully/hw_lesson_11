@@ -7,7 +7,7 @@ def test_practice_form(setup_browser):
     browser = setup_browser
 
     with allure.step("Открываем страницу"):
-        browser.open("https://demoqa.com/automation-practice-form")
+        browser.get("https://demoqa.com/automation-practice-form")
         browser.element(".practice-form-wrapper").should(have.text("Student Registration Form"))
         browser.driver.execute_script("$('footer').remove()")
         browser.driver.execute_script("$('#fixedban').remove()")
