@@ -23,9 +23,6 @@ def test_practice_form(setup_browser):
     
     with allure.step("Вводим номер телефона"):
         form.fill_mobile('1234567890')
-    
-    with allure.step("Выбираем предмет"):
-        form.add_subject("Maths")
 
     with allure.step("Отправляем форму"):
         browser.find_element("#submit").click()
