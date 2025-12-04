@@ -14,8 +14,7 @@ def add_screenshot(driver):
 
 def add_logs(driver):
     try:
-        logs = driver.get_log('browser')
-        log_text = "\n".join(f"{entry['level']} - {entry['message']}" for entry in logs)
+        log_text = "".join(f'{text}\n' for text in driver.execute("getLog", {'type': 'browser'})['value'])
         allure.attach(
             log_text,
             name="Browser logs",
