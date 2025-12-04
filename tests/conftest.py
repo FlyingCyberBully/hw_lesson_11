@@ -28,9 +28,6 @@ def setup_browser(request):
         options=options
     )
 
-    # browser = Browser(Config(driver))
-    # yield browser
-
     yield driver
 
     attach.add_screenshot(driver)
@@ -39,10 +36,3 @@ def setup_browser(request):
     attach.add_video(driver)
 
     driver.quit()
-
-    # attach.add_screenshot(browser)
-    # attach.add_logs(browser)
-    # attach.add_html(browser)
-    # attach.add_video(browser)
-
-    # browser.quit()
